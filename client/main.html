@@ -1,20 +1,25 @@
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, height=device-height width=device-width" />
   <title>Puzzle || Crosswords</title>
 </head>
 
-<body>
-<div class="ht">
-   {{> headerTemplate}} 
-</div>
- 
-</body>
-
 <template name="notFound">
-  {{> headerTemplate}}
+  NotFound
 </template>
 <template name="loading">
   Loading
 </template>
-<template>
-  {{> headerTemplate}}
+<template name="main">
+  <div class="main-wrapper">
+    <div class="header-template upper-layer">
+      {{> headerTemplate}}
+    </div>
+    <div class="main-template upper-layer">
+      {{> yield}}
+    </div>
+    <div class="footer-template upper-layer">
+      {{> footerTemplate}}
+    </div>  
+  </div> 
 </template>
