@@ -7,7 +7,7 @@ Template.cwPlayer.rendered = (function() {
     function printLegend(b) {
         var html = "";
         for (var key in b) {
-            html += '<div class="col-xs-6 col-md-6 text-center">';
+            html += '<div class="col-xs-6 col-md-6 text-left clues">';
             html += "<h4>"+key+"</h4>";
             for (var s in b[key]) {
                 html += b[key][s]['position']+". "+b[key][s]['clue']+"<br />";
