@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
+import { Pairs } from '../lib/collections.js';
 
 Meteor.startup(() => {
-  // code to run on server at startup
+  // Pairs.insert({'message': 'Hello'});
 });

@@ -1,0 +1,44 @@
+.cwPlayerWrapper {
+	background-color: #FFFFFF;
+	min-height: calc(90vh - 50px);
+	/*color: white;*/
+	text-align: center;
+	align-content: center;
+	align-items: center;
+
+	min-width: 500px;
+	margin: 0 auto;
+	width: 70vw;
+	padding: 20px 0px 20px 0px;
+
+	
+}
+
+table.cwPuzzleMain{
+	border: 2px solid #222222;
+	margin: 0 auto;
+}
+table.cwPuzzleMain td{
+	width: 20pt;
+	height: 20pt;
+	border: 1px solid #666666;
+	margin: 10px auto;
+	
+	font-size: 12pt;
+	font-weight: bold;
+	text-transform: uppercase;
+
+	background-size: 8px 8px no-repeat;
+}
+table.cwPuzzleMain td.blank-cell {
+	background-color: #222222;
+}
+input.cellInput {
+	width: 18pt;
+	height: 18pt;
+	border: 0px;
+	
+	text-align: center;
+	text-transform: uppercase;
+	background-color: transparent;
+}

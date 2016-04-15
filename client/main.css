@@ -11,8 +11,8 @@
 
 .header-template {
 }
-.main-template {
-	padding-top: 50px;
+.main-template {	
+	padding-top: 30px;
 	min-height: calc(100vh - 20px); 
 	position: relative;
 

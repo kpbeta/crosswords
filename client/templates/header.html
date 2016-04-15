@@ -1,11 +1,33 @@
 <template name="headerTemplate">
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<div class="navbar-brand">
-					Aloha
-				</div>
-			</div>
-		</div>
-	</div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	    	{{#if currentUser}}
+	      		<a class="navbar-brand" href="/dashboard">Crossword</a>
+	      	{{else}}
+	      		<a class="navbar-brand" href="/">Crossword</a>
+	   		{{/if}}
+	    </div>
+	    <ul class="nav navbar-nav navbar-right">
+		    <li><a href="#">{{> headerLog}}</a></li>
+	     </ul>
+	  </div>    
+      
+  </nav>
+
+</template>
+ 
+<template name="headerLog">
+    <div class="row">
+        <div class="pull-left">
+          {{#if currentUser}}
+          	<span>Welcome {{currentUser.profile.name}}</span>
+              <button class="btn btn-danger btn-logout logout">Logout</button>
+          {{else}}
+              <a href="\login" class="btn btn-primary">Login</a>
+              <a href="\register" class="btn btn-primary">Register</a>
+          {{/if}}
+        </div>
+    </div>
 </template>
