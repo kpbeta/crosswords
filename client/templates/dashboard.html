@@ -1,3 +1,34 @@
 <template name="dashboard">
-	HELLO
+	{{#if currentUser}}
+		<div class="dashboardWrapper">
+			<div class="dashboardContent col-xs-12">
+				<div class="personalColDiv colDiv col-md-6 col-sm-12">
+					<h3>Your Collections</h3>
+					{{#each personalCollections}}
+					<ul class="list-group">
+						{{> CollectionTemplate}}
+					</ul>
+					{{/each}}
+				</div>
+				<div class="globalColDiv colDiv col-md-6 col-sm-12">
+					<h3>Global Collections</h3>
+					{{#each globalCollections}}
+					<ul class="list-group">
+						{{> CollectionTemplate}}
+					</ul>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+		
+
+
+
+	{{else}}
+		{{> landingPage }}
+	{{/if}}
+</template>
+
+<template name="CollectionTemplate">
+	<li class="collectionList"><a href="/col/">{{collectionName}}</a></li>
 </template>

@@ -1,0 +1,17 @@
+.dashboardWrapper {
+	min-height: calc(100vh - 50px);
+	max-width: 80vw;
+	margin: 0 auto;
+
+	background-color: #FFFFFF;
+	color: #000000;
+	padding-top: 20vh;
+}
+.collectionList {
+	list-style: none;
+	color: #222222;
+	text-decoration: none;
+}
+.colDiv {
+	text-align: center;
+}
