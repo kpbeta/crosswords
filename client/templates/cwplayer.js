@@ -1,40 +1,64 @@
 Template.cwPlayer.rendered = (function() {
     function printGrid(a) {
         $("#cwContent").html(a);
+        $("#submitCwBtn").toggleClass('hideIt');
     }
-    function printLegent(a) {
-        $("#cwContent").html(b);
+    function printLegend(b) {
+        var html = "";
+        for (var key in b) {
+            html += '<div class="col-xs-6 col-md-6 text-center">';
+            html += "<h4>"+key+"</h4>";
+            for (var s in b[key]) {
+                html += b[key][s]['position']+". "+b[key][s]['clue']+"<br />";
+            }
+            html += "</div>";
+        }
+        $("#cwLegend").html(html);
     }
-    function getAndUpdate(callback) {
-        var noAnsGrid = getCw().gridWithoutAns;
-        setTimeout(function() {
-            callback(noAnsGrid);
-        }, 5000);
+    function getAndUpdate(callback1, callback2) {
+        var CW = getCw();
+        if (CW.success) {    
+            var noAnsGrid = CW.gridWithoutAns;
+            var legend = CW.gridLegend;
+            setTimeout(function() {
+                callback1(noAnsGrid);
+                console.log(legend);
+                callback2(legend);
+            }, 5000);
+        } else {
+            $("#cwContent").text("Could not generate crossword. Please refresh.");
+        }
         
     }
-    getAndUpdate(printGrid);    
+    getAndUpdate(printGrid, printLegend);    
 });
 
 function getCw(wo, hi) {
-	let words = ["apple","pale", "elephant", "cat","dog", "donkey","fish","giraffe", "hyena", "oerfdkbull", "kangaroo", "cantaloupe", "pomegranate", "gravitate","orange","assiduous"];
-	let hints = ["a","b", "c", "a","a", "a", "a","b", "c", "a","a", "a", "a","b","s","b"];
+	let words = ["Reality","Apprentice", "Bootstrap", "hundred","Interactive", "javascript","jquery", "slack", "projects", "coffee", "markup"];
+	let hints = ["what is real","who learns", "Easy Strapping", "cents in a dollar","you can play with it", "coffee and code","it is the answer", "feel lazy", "pursuit for perfection", "developer's messiah","html is not a programming language"];
 	// console.log(words);
 
 	let cw = new Crossword(words, hints);
 
 	console.log(cw);
 
-	let grid = cw.getSquareGrid(100000);
+	let grid = cw.getSquareGrid(10000000);
+
+    var vals;
 	if (cw.getBadWords()) {
-		console.log(cw.getBadWords());
-	}
-	
-	var vals = {'gridLength': grid.length,
-				'gridWidth': grid.width,
+        vals = {'success' : 0};
+        console.log(cw.getBadWords());
+
+	} else {
+        vals = {'success' : 1,
+                'gridLength': grid.length,
+                'gridWidth': grid.width,
                 'gridArray': CrosswordCells.toArrayOfCells(grid),
-				'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
-				'gridWithAns': CrosswordUtils.toHtml(grid, true),
-				'gridLegend': cw.getLegend(grid)};
+                'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
+                'gridWithAns': CrosswordUtils.toHtml(grid, true),
+                'gridLegend': cw.getLegend(grid)};
+    }
+	
 
 	return vals;
 	// return CrosswordUtils.toHtml(grid, false);
@@ -43,6 +67,7 @@ function getCw(wo, hi) {
 	// console.log(CrosswordCells.toArrayOfCells(grid));
 	
 }
+
 
 
 

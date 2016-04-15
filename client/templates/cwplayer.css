@@ -41,3 +41,9 @@ input.cellInput {
 	text-transform: uppercase;
 	background-color: transparent;
 }
+.cwLegend {
+	height: 250px;
+}
+.hideIt {
+	display: none;
+}
