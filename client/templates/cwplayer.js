@@ -2,6 +2,9 @@ Template.cwPlayer.rendered = (function() {
     function printGrid(a) {
         $("#cwContent").html(a);
     }
+    function printLegent(a) {
+        $("#cwContent").html(b);
+    }
     function getAndUpdate(callback) {
         var noAnsGrid = getCw().gridWithoutAns;
         setTimeout(function() {
@@ -24,11 +27,11 @@ function getCw(wo, hi) {
 	let grid = cw.getSquareGrid(100000);
 	if (cw.getBadWords()) {
 		console.log(cw.getBadWords());
-		return 0;
 	}
 	
 	var vals = {'gridLength': grid.length,
 				'gridWidth': grid.width,
+                'gridArray': CrosswordCells.toArrayOfCells(grid),
 				'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
 				'gridWithAns': CrosswordUtils.toHtml(grid, true),
 				'gridLegend': cw.getLegend(grid)};
