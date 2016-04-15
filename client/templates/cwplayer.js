@@ -1,16 +1,18 @@
 Template.cwPlayer.rendered = (function() {
-	
-	$("#cwContent").html(JSON.stringify(getCw().gridLegend));
-	// getCw();
-});
-
-Template.cwPlayer.helpers({ 
-    'theCrossword':  function(){
-        return getCw().gridWithoutAns;
+    function printGrid(a) {
+        $("#cwContent").html(a);
     }
+    function getAndUpdate(callback) {
+        var noAnsGrid = getCw().gridWithoutAns;
+        setTimeout(function() {
+            callback(noAnsGrid);
+        }, 5000);
+        
+    }
+    getAndUpdate(printGrid);    
 });
 
-function getCw() {
+function getCw(wo, hi) {
 	let words = ["apple","pale", "elephant", "cat","dog", "donkey","fish","giraffe", "hyena", "oerfdkbull", "kangaroo", "cantaloupe", "pomegranate", "gravitate","orange","assiduous"];
 	let hints = ["a","b", "c", "a","a", "a", "a","b", "c", "a","a", "a", "a","b","s","b"];
 	// console.log(words);
@@ -19,7 +21,7 @@ function getCw() {
 
 	console.log(cw);
 
-	let grid = cw.getSquareGrid(10000);
+	let grid = cw.getSquareGrid(100000);
 	if (cw.getBadWords()) {
 		console.log(cw.getBadWords());
 		return 0;

@@ -1,6 +1,6 @@
 .cwPlayerWrapper {
 	background-color: #FFFFFF;
-	min-height: calc(90vh - 50px);
+	min-height: calc(100vh - 50px);
 	/*color: white;*/
 	text-align: center;
 	align-content: center;
@@ -10,8 +10,7 @@
 	margin: 0 auto;
 	width: 70vw;
 	padding: 20px 0px 20px 0px;
-
-	
+	padding-top: 10vh;
 }
 
 table.cwPuzzleMain{
