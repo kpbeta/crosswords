@@ -1,3 +1,4 @@
+var CW;
 Template.cwPlayer.rendered = (function() {
     function printGrid(a) {
         $("#cwContent").html(a);
@@ -16,7 +17,7 @@ Template.cwPlayer.rendered = (function() {
         $("#cwLegend").html(html);
     }
     function getAndUpdate(callback1, callback2) {
-        var CW = getCw();
+        CW = getCw();
         if (CW.success) {    
             var noAnsGrid = CW.gridWithoutAns;
             var legend = CW.gridLegend;
@@ -24,7 +25,7 @@ Template.cwPlayer.rendered = (function() {
                 callback1(noAnsGrid);
                 console.log(legend);
                 callback2(legend);
-            }, 5000);
+            }, 500);
         } else {
             $("#cwContent").text("Could not generate crossword. Please refresh.");
         }
@@ -32,6 +33,36 @@ Template.cwPlayer.rendered = (function() {
     }
     getAndUpdate(printGrid, printLegend);    
 });
+
+Template.cwPlayer.events({
+    'click .goBack': function(event) {
+        Router.go('/');
+    },
+    'click .checkCW':function(event) {
+        // console.log(CW);
+        var len = CW.gridLength;
+        var arr = CW.gridArray;
+        console.log(len);
+        var inp, v;
+        for (var i=0; i<len; i++) {
+            for (var j=0; j<len; j++) {
+                inp = $("#pcr"+i+"c"+j); 
+                v = arr[i*len+j];
+                if (v != 0) {
+                    if (v.toUpperCase() == inp.val()) {
+                        inp.addClass('rightAns');
+                        console.log(v.toUpperCase()+":"+"inp.val()");
+                    } else {
+                        inp.addClass('wrongAns');
+                    }
+                    inp.attr("title", inp.val());
+                    inp.val(v.toUpperCase());
+                }
+            }
+        }
+    }
+});
+
 
 function getCw(wo, hi) {
 	let words = ["Reality","Apprentice", "Bootstrap", "hundred","Interactive", "javascript","jquery", "slack", "projects", "coffee", "markup"];
@@ -52,7 +83,7 @@ function getCw(wo, hi) {
 	} else {
         vals = {'success' : 1,
                 'gridLength': grid.length,
-                'gridWidth': grid.width,
+                'gridWidth': grid[0].length,
                 'gridArray': CrosswordCells.toArrayOfCells(grid),
                 'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
                 'gridWithAns': CrosswordUtils.toHtml(grid, true),
@@ -67,9 +98,6 @@ function getCw(wo, hi) {
 	// console.log(CrosswordCells.toArrayOfCells(grid));
 	
 }
-
-
-
 
 
 

@@ -47,3 +47,9 @@ input.cellInput {
 .hideIt {
 	display: none;
 }
+.wrongAns{
+	background-color: red;
+}
+.rightAns {
+	background-color: green;
+}
