@@ -48,8 +48,10 @@ input.cellInput {
 	display: none;
 }
 .wrongAns{
-	background-color: red;
+	background-color: #e04646;
+	color: white
 }
 .rightAns {
-	background-color: green;
+	background-color: #6cbc35;
+	color: white;
 }

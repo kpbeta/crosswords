@@ -40,33 +40,41 @@ Template.cwPlayer.events({
     },
     'click .checkCW':function(event) {
         // console.log(CW);
+        $(".checkCW").toggleClass("hideIt");
         var len = CW.gridLength;
         var arr = CW.gridArray;
         console.log(len);
-        var inp, v;
+        var inp, inptd, v;
+        var total=0, wrong=0, right=0;
         for (var i=0; i<len; i++) {
             for (var j=0; j<len; j++) {
-                inp = $("#pcr"+i+"c"+j); 
+                inp = $("#pcrInp"+i+"c"+j);
+                inptd = $("#pcr"+i+"c"+j);
                 v = arr[i*len+j];
                 if (v != 0) {
-                    if (v.toUpperCase() == inp.val()) {
-                        inp.addClass('rightAns');
-                        console.log(v.toUpperCase()+":"+"inp.val()");
+                    if (v.toUpperCase() == inp.val().toUpperCase()) {
+                        inptd.addClass('rightAns');
+                        right++;
                     } else {
-                        inp.addClass('wrongAns');
+                        inptd.addClass('wrongAns');
+                        wrong++;
                     }
-                    inp.attr("title", inp.val());
+                    total++;
+                    inptd.attr("title", inp.val().toUpperCase());
                     inp.val(v.toUpperCase());
                 }
             }
         }
+        $(".result").toggleClass("hideIt");
+        $(".resultInst").toggleClass("hideIt");
+        $(".result").html("You got <b>"+right+"</b> correct out of <b>"+total+"</b> total letters.");
     }
 });
 
 
 function getCw(wo, hi) {
 	let words = ["Reality","Apprentice", "Bootstrap", "hundred","Interactive", "javascript","jquery", "slack", "projects", "coffee", "markup"];
-	let hints = ["what is real","who learns", "Easy Strapping", "cents in a dollar","you can play with it", "coffee and code","it is the answer", "feel lazy", "pursuit for perfection", "developer's messiah","html is not a programming language"];
+	let hints = ["what is real","who learns", "Easy Strapping", "cents in a dollar","you can play with it", "coffee and code","it is the answer", "loosen", "pursuit for perfection", "developer's messiah","html is not a programming language"];
 	// console.log(words);
 
 	let cw = new Crossword(words, hints);
