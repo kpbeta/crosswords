@@ -1,0 +1,49 @@
+<template name="creator">
+	<div class="creatorWrapper">
+		<div class="row">
+			<div class="headText">
+				<h2 class="text-center">Create your Own Collection</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-10 col-offset-2">
+				<form action="" class="form-horizontal margin-top-lg">
+					<div class="form-group">
+						<label for="colTitle" class="control-label col-xs-3">
+							Title
+						</label>
+						<div class="col-xs-9">
+							<input type="text" id="colTitle" class="form-control" placeholder="Eg. Origins of Animal, Countries and Cuisine, etc.">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="colDesc" class="control-label col-xs-3">
+							Description
+						</label>
+						<div class="col-xs-9">
+							<input type="text" id="colDesc" class="form-control" placeholder="Eg. Where did these animals came from?, Where does this cuisine come from?">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="colPairs" class="control-label col-xs-3">
+							Word-Hint Pairs
+						</label>
+						<div class="col-xs-9">
+							<textarea class="form-control" id="colPairs" placeholder="Input minimum of 5 word-hint pairs separated by hyphen (-), each separated by comma. Eg."></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-xs-offset-3 col-xs-9">
+							<button id="submitButton" hred="/dashboard" class="btn btn-danger"> BACK </button>
+							&nbsp; &nbsp; &nbsp;
+							<button id="submitButton" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</template>

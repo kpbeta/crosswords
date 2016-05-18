@@ -73,22 +73,22 @@ Template.cwPlayer.events({
 
 
 function getCw(wo, hi) {
-	let words = ["Reality","Apprentice", "Bootstrap", "hundred","Interactive", "javascript","jquery", "slack", "projects", "coffee", "markup"];
-	let hints = ["what is real","who learns", "Easy Strapping", "cents in a dollar","you can play with it", "coffee and code","it is the answer", "loosen", "pursuit for perfection", "developer's messiah","html is not a programming language"];
+	let words = ["STARK", "TARGARYEN", "BOLTON", "UMBER", "TULLY", "LANNISTER", "MARTELL", "FLORENT", "BARATHEON", "GREYJOY"];
+	let hints = ["Winterfell", "Dragonstone", "Dreadfort", "Last Hearth", "Riverrun", "Casterly Rock", "Dorne", "Brightwater Keep", "Storm's End", "Iron Islands"];
 	// console.log(words);
 
 	let cw = new Crossword(words, hints);
-
-	console.log(cw);
-
-	let grid = cw.getSquareGrid(10000000);
-
+	let grid = cw.getSquareGrid(10000000000000);
     var vals;
-	if (cw.getBadWords()) {
+    var countRetry = 0;
+	while (cw.getBadWords() && countRetry) {
+        console.log(cw.getBadWords()[0]);
+        countRetry++;
+	}
+    if (countRetry == 5) {
         vals = {'success' : 0};
-        console.log(cw.getBadWords());
-
-	} else {
+        console.log(cw.getBadWords()[0]);
+    } else {
         vals = {'success' : 1,
                 'gridLength': grid.length,
                 'gridWidth': grid[0].length,
@@ -97,14 +97,8 @@ function getCw(wo, hi) {
                 'gridWithAns': CrosswordUtils.toHtml(grid, true),
                 'gridLegend': cw.getLegend(grid)};
     }
-	
-
 	return vals;
-	// return CrosswordUtils.toHtml(grid, false);
-	// console.log(CrosswordUtils.toHtml(grid, true));
-	// console.log(cw.getLegend(grid));
-	// console.log(CrosswordCells.toArrayOfCells(grid));
-	
+
 }
 
 

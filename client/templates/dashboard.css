@@ -1,11 +1,10 @@
 .dashboardWrapper {
 	min-height: calc(100vh - 50px);
-	max-width: 80vw;
 	margin: 0 auto;
 
 	background-color: #FFFFFF;
 	color: #000000;
-	padding-top: 20vh;
+	padding-top: 5vh;
 }
 .collectionList {
 	list-style: none;
@@ -13,8 +12,29 @@
 	text-decoration: none;
 }
 .colDiv {
-	text-align: center;
+	text-align: left;
+	padding: 0px 20px 0px 20px;
 }
 .cwLegend {
-	padding-top: 20px;
+	padding-top: 30px;
+}
+.tab-content {
+	height: 100%;
+}
+.dictTempDiv {
+	padding: 10px;
+}
+ul, li {
+	list-style: none;
+}
+
+.al {
+		/*background-color: red;*/
+	padding: 4px 0px 0px 60vw;
+}
+
+.onlineToggleBox {
+	color: red;
+	background-color: blue;
+	height: 10px;
 }

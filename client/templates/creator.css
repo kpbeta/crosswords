@@ -1,0 +1,9 @@
+.creatorWrapper {
+	min-height: calc(100vh - 50px);
+	max-width: 80vw;
+	margin: 0 auto;
+
+	background-color: #FFFFFF;
+	color: #000000;
+	padding-top: 20vh;
+}
