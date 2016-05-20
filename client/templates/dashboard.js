@@ -1,6 +1,5 @@
 import {Pairs} from '../../lib/collections.js';
-import {OnlinePlayers} from '../../lib/collections.js';
-import {scores} from '../../lib/collections.js';
+import {Scores} from '../../lib/collections.js';
 
 var online = 0;
 var selectedOnlineUser = 0;
@@ -16,7 +15,7 @@ Template.dashboard.events({
 		if (online) {
 			$('.dashboardTabs').removeClass("active");
 			$('.peopleTab').addClass("active");
-			alert("Helo");
+			// alert("Helo");
 		} else {
 			// alert("Change your status to online to play with people online.");
 		}
@@ -28,14 +27,15 @@ Template.dashboard.events({
 
 Template.dashboard.helpers({
 	globalCollections: function() {
-		console.log("We running");
-		console.log(Pairs.find({'global': 1}));
 		return Pairs.find({$and: [{'global': 1}, {'uploaderID': {$not: Meteor.userId()}}]});
 	},
 	
 	personalCollections: function() {
-		console.log('thisUser is '+ Meteor.userId());
 		return Pairs.find({$and: [{'uploaderId': Meteor.userId()}, {'global': 0}]});
+	},
+
+	personalScores: function() {
+		return Scores.find({'userId': Meteor.userId()});
 	}
 	
 })

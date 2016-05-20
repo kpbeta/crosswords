@@ -10,8 +10,8 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 				    <li role="presentation" class="dashboardTabs active dictTab"><a href="#dictionaries" aria-controls="home" role="tab" data-toggle="tab">Collections</a></li>
-				    <li role="presentation" class="dashboardTabs peopleTab"><a href="#people" aria-controls="profile" role="tab" data-toggle="tab">People</a></li>
-				    <li role="presentation" class="dashboardTabs scoreTab"><a href="#scoreboard" aria-controls="messages" role="tab" data-toggle="tab">Scoreboard</a></li>
+				    <!-- <li role="presentation" class="dashboardTabs peopleTab"><a href="#people" aria-controls="profile" role="tab" data-toggle="tab">People</a></li>
+				     --><li role="presentation" class="dashboardTabs scoreTab"><a href="#scoreboard" aria-controls="messages" role="tab" data-toggle="tab">Scoreboard</a></li>
 
 				    <div class="al">
 				    	<a href="/creator">
@@ -104,13 +104,19 @@
 						</div>
 					</div>
 			    </div>	
-			    <div role="tabpanel" class="tab-pane" id="people">
+			   <!--  <div role="tabpanel" class="tab-pane" id="people">
 			    	<div class="col-xs-offset-1 col-xs-11 player panel">
 			    		Select from the following online players you want to play a crossword game with:
 			    	</div>
-			    </div>
+			    </div> -->
 			    <div role="tabpanel" class="tab-pane" id="scoreboard">
-			    	<!-- SCOREBOARD -->
+			    	<div class="col-xs-offset-1 col-xs-10 score panel text-center">
+			    	<h3>SCOREBOARD</h3>
+			    		{{> scoreHeader}}
+				    	{{#each personalScores}}
+				    		{{> scoreTemplate}}
+						{{/each}}
+					</div>
 			    </div>
   			</div>
 
@@ -132,6 +138,29 @@
 	</div>
 </template>
 
-<template name="peopleTemplate">
-	
+<template name="scoreHeader">
+	<div class="col-xs-12 scoreHeader">
+		<div class="col-xs-4">
+			Dictionary Played
+		</div>
+		<div class="col-xs-4">
+			Score
+		</div>
+		<div class="col-xs-4">
+			Played on
+		</div>
+	</div>
+</template>
+<template name="scoreTemplate">
+	<div class="col-xs-12 scores">
+		<div class="col-xs-4">
+			{{dictTitle}}
+		</div>
+		<div class="col-xs-4">
+			{{score}}%
+		</div>
+		<div class="col-xs-4">
+			{{date}}
+		</div>
+	</div>
 </template>

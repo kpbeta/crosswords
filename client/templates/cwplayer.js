@@ -1,4 +1,5 @@
 import {Pairs} from '../../lib/collections.js';
+import {Scores} from '../../lib/collections.js';
 
 var CW, dictData;
 var length, id;
@@ -6,7 +7,6 @@ var length, id;
 Template.cwPlayer.onCreated(function() {
     length = Router.current().url.length;
     id = Router.current().url.substring(length-17, length);
-    console.log(id);
 });
 
 Template.cwPlayer.rendered = (function() {
@@ -61,7 +61,7 @@ Template.cwPlayer.events({
         $(".checkCW").toggleClass("hideIt");
         var len = CW.gridLength;
         var arr = CW.gridArray;
-        console.log(len);
+        // console.log(len);
         var inp, inptd, v;
         var total=0, wrong=0, right=0;
         for (var i=0; i<len; i++) {
@@ -86,40 +86,47 @@ Template.cwPlayer.events({
         $(".result").toggleClass("hideIt");
         $(".resultInst").toggleClass("hideIt");
         $(".result").html("You got <b>"+right+"</b> correct out of <b>"+total+"</b> total letters.");
+    
+        let user = Meteor.userId();
+        let colId = id;
+        let colTitle = dictData = Pairs.findOne({"_id": id}).title;
+        let score = Math.floor((right*100)/total);
+        let date = new Date();
+
+        Scores.insert({
+            "userId": user,
+            "dictId": colId,
+            "dictTitle": colTitle,
+            "score": score,
+            "date": date
+        });
     }
+
+    
+
+
 });
 
 
 function getCw(obj) {
-
     let wo = [];
     let hi = [];
-
     for (var key in obj) {
         wo.push(key);
         hi.push(obj[key]);
     }
 
 	let cw = new Crossword(wo, hi);
-	let grid = cw.getSquareGrid(10000000000000);
-    var vals;
-    var countRetry = 0;
-	while (cw.getBadWords() && countRetry) {
-        console.log(cw.getBadWords()[0]);
-        countRetry++;
-	}
-    if (countRetry == 5) {
-        vals = {'success' : 0};
-    } else {
-        vals = {'success' : 1,
-                'gridLength': grid.length,
-                'gridWidth': grid[0].length,
-                'gridArray': CrosswordCells.toArrayOfCells(grid),
-                'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
-                'gridWithAns': CrosswordUtils.toHtml(grid, true),
-                'gridLegend': cw.getLegend(grid)};
-    }
-	return vals;
+	let grid = cw.getSquareGrid(1000000000);
+    var vals = {
+            'success' : 1,
+            'gridLength': grid.length,
+            'gridWidth': grid[0].length,
+            'gridArray': CrosswordCells.toArrayOfCells(grid),
+            'gridWithoutAns': CrosswordUtils.toHtml(grid, false),
+            'gridWithAns': CrosswordUtils.toHtml(grid, true),
+            'gridLegend': cw.getLegend(grid)};
+    return vals;
 
 }
 

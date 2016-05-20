@@ -38,3 +38,14 @@ ul, li {
 	background-color: blue;
 	height: 10px;
 }
+.scoreHeader {
+	font-weight: bold;
+	color: #333333;
+	font-size: 12pt;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #AAAAAA;
+}
+.scores{
+	padding: 3px;
+	font-size: 11pt;
+}
