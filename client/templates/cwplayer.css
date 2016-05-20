@@ -42,7 +42,7 @@ input.cellInput {
 	background-color: transparent;
 }
 .cwLegend {
-	height: 250px;
+	min-height: 250px;
 }
 .hideIt {
 	display: none;

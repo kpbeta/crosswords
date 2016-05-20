@@ -1,16 +1,18 @@
 <template name="cwPlayer">
 	<div class="cwPlayerWrapper">
+		<h3>{{dict.title}}</h3>
+		<h4>{{dict.desc}}</h4>
 		<div class="cwContent" id="cwContent" name="cwContent">
-			LOADING...
+			<b>LOADING...</b>
 		</div>
 		<div class="result hideIt"></div>
 		<div class="resultInst hideIt">You can look at your original answer by hovering the mouse over the box.</div>
-		<div class="cwLegend" id="cwLegend" name="cwLegend"></div>
+		<div class="cwLegend col-lg-offset-2 col-lg-10" id="cwLegend" name="cwLegend"></div>
 		<div class="floater"></div>
 		<div class="submitBtn text-center hideIt" id="submitCwBtn">
 			<button class="btn-primary btn goBack"> GO BACK </button>
 				&nbsp; &nbsp; &nbsp; &nbsp;
-				<a href='#' onclick='location.reload(true); return false;'><button class="btn-primary btn goBack"> Rearrange Grid with Same Content </button></a>
+				<a href='/cwplayer/{{dict._id}}' onclick='location.reload(true); return false;'><button class="btn-primary btn goBack"> Rearrange Grid with Same Content </button></a>
 				&nbsp; &nbsp; &nbsp; &nbsp;
 			<button class="btn-primary btn checkCW">SUBMIT PUZZLE</button>
 		</div>

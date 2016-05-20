@@ -5,8 +5,8 @@ Template.register.events({
         var password = event.target.registerPassword.value;
         var firstname = event.target.registerFirstname.value;
         var lastname = event.target.registerLastname.value;
-        var user = {'email':email,password:password,profile:{name:firstname +" "+lastname}};
- 
+        var user = {'email':email,'password':password,profile:{name:firstname +" "+lastname}};
+
         Accounts.createUser(user,function(err){
             if(!err) {
                 Router.go('/dashboard');

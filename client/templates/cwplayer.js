@@ -1,5 +1,16 @@
-var CW;
+import {Pairs} from '../../lib/collections.js';
+
+var CW, dictData;
+var length, id;
+
+Template.cwPlayer.onCreated(function() {
+    length = Router.current().url.length;
+    id = Router.current().url.substring(length-17, length);
+    console.log(id);
+});
+
 Template.cwPlayer.rendered = (function() {
+
     function printGrid(a) {
         $("#cwContent").html(a);
         $("#submitCwBtn").toggleClass('hideIt');
@@ -16,22 +27,29 @@ Template.cwPlayer.rendered = (function() {
         }
         $("#cwLegend").html(html);
     }
+
     function getAndUpdate(callback1, callback2) {
-        CW = getCw();
-        if (CW.success) {    
-            var noAnsGrid = CW.gridWithoutAns;
-            var legend = CW.gridLegend;
-            setTimeout(function() {
-                callback1(noAnsGrid);
-                console.log(legend);
-                callback2(legend);
-            }, 500);
-        } else {
-            $("#cwContent").text("Could not generate crossword. Please refresh.");
-        }
+        setTimeout(function() {
+            dictData = Pairs.findOne({"_id": id});
+            console.log(JSON.parse(dictData.pairs));
+
+            CW = getCw(JSON.parse(dictData.pairs));
+            if (CW.success) {    
+                var noAnsGrid = CW.gridWithoutAns;
+                var legend = CW.gridLegend;
+                setTimeout(function() {
+                    callback1(noAnsGrid);
+                    console.log(legend);
+                    callback2(legend);
+                }, 500);
+            } else {
+                $("#cwContent").text("Could not generate crossword. Please refresh.");
+            }
+        }, 500);
         
     }
-    getAndUpdate(printGrid, printLegend);    
+    getAndUpdate(printGrid, printLegend);
+
 });
 
 Template.cwPlayer.events({
@@ -60,7 +78,7 @@ Template.cwPlayer.events({
                         wrong++;
                     }
                     total++;
-                    inptd.attr("title", inp.val().toUpperCase());
+                    inptd.attr("title", (inp.val().toUpperCase()?inp.val().toUpperCase():"(blank)"));
                     inp.val(v.toUpperCase());
                 }
             }
@@ -72,12 +90,17 @@ Template.cwPlayer.events({
 });
 
 
-function getCw(wo, hi) {
-	let words = ["STARK", "TARGARYEN", "BOLTON", "UMBER", "TULLY", "LANNISTER", "MARTELL", "FLORENT", "BARATHEON", "GREYJOY"];
-	let hints = ["Winterfell", "Dragonstone", "Dreadfort", "Last Hearth", "Riverrun", "Casterly Rock", "Dorne", "Brightwater Keep", "Storm's End", "Iron Islands"];
-	// console.log(words);
+function getCw(obj) {
 
-	let cw = new Crossword(words, hints);
+    let wo = [];
+    let hi = [];
+
+    for (var key in obj) {
+        wo.push(key);
+        hi.push(obj[key]);
+    }
+
+	let cw = new Crossword(wo, hi);
 	let grid = cw.getSquareGrid(10000000000000);
     var vals;
     var countRetry = 0;
@@ -87,7 +110,6 @@ function getCw(wo, hi) {
 	}
     if (countRetry == 5) {
         vals = {'success' : 0};
-        console.log(cw.getBadWords()[0]);
     } else {
         vals = {'success' : 1,
                 'gridLength': grid.length,

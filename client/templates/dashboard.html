@@ -9,9 +9,9 @@
 			<div class="dashboardTabSelect col-xs-12">
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
-				    <li role="presentation" class="active"><a href="#dictionaries" aria-controls="home" role="tab" data-toggle="tab" class=" dbtab">Collections</a></li>
-				    <li role="presentation"><a href="#people" class="dbtab" aria-controls="profile" role="tab" data-toggle="tab">People</a></li>
-				    <li role="presentation"><a href="#scoreboard" class="dbtab" aria-controls="messages" role="tab" data-toggle="tab">Scoreboard</a></li>
+				    <li role="presentation" class="dashboardTabs active dictTab"><a href="#dictionaries" aria-controls="home" role="tab" data-toggle="tab">Collections</a></li>
+				    <li role="presentation" class="dashboardTabs peopleTab"><a href="#people" aria-controls="profile" role="tab" data-toggle="tab">People</a></li>
+				    <li role="presentation" class="dashboardTabs scoreTab"><a href="#scoreboard" aria-controls="messages" role="tab" data-toggle="tab">Scoreboard</a></li>
 
 				    <div class="al">
 				    	<a href="/creator">
@@ -20,8 +20,9 @@
 				    		</span>
 				    	</a>
 				    	&nbsp; &nbsp; &nbsp;
+				    	<b>STATUS</b>
 				    	<span class="onlineToggle">
-  							<input type="checkbox" class="onlineToggleBox" data-toggle="toggle" data-on="Online" data-off="Offline" data-height="15">
+  							<input type="checkbox" data-toggle="toggle" data-on="Online" data-off="Offline" data-height="15" onColor="success" offColor="danger">	
 				    	</span>
 
 				    </div>
@@ -36,10 +37,14 @@
 						<div class="personalColDiv colDiv col-md-6 col-sm-12">
 							<h3 class="text-center">Your Personal Dictionaries</h3>
 							<ul class="list-group">
-								
-								<li class="dictionaryList"><li>
+								{{#each personalCollections}}
+								<li>
+									{{> dictionaryTemplate}}
+								</li>
+								{{/each}}
+								<!-- <li class="dictionaryList">
 									<div class="dictTempDiv">
-										<b>SAT Practice Words</b> - Set of Words and Meanings from Collegeboard SAT Practice Book
+										<b>SAT Practice Words</b> - Set of Words and Meanings from Collegeboard SAT Practice Book	
 										<br />
 										<a href="/cwplayer"><button class="btn btn-info btn-sm">Play</button></a>
 										&nbsp;&nbsp;&nbsp;
@@ -54,20 +59,27 @@
 										&nbsp;&nbsp;&nbsp;
 										<button class="btn btn-success btn-sm play-online-button">Play Online</button>
 									</div>
-								</li></li>
+								</li> -->
 							</ul>
 						</div>
 
 						<div class="globalColDiv colDiv col-md-6 col-sm-12">
 							<h3 class="text-center">Global Dictionaries</h3>
 							<ul class="list-group">
+								{{#each globalCollections}}
 								<li>
+									{{> dictionaryTemplate}}
+								</li>
+								{{/each}}
+								<!-- <li>
 									<div class="dictTempDiv">
 										<b>Game of Thrones Houses</b> - Find the noble houses in Game Of Thones by the city or place they are located in
 										<br />
 										<a href="/cwplayer"><button class="btn btn-info btn-sm">Play</button></a>
 										&nbsp;&nbsp;&nbsp;
+										<a href="#people" aria-controls="people" role="tab" data-toggle="tab">
 										<button class="btn btn-success btn-sm play-online-button">Play Online</button>
+										</a>
 									</div>
 								</li>
 								<li>
@@ -87,13 +99,15 @@
 										&nbsp;&nbsp;&nbsp;
 										<button class="btn btn-success btn-sm play-online-button">Play Online</button>
 									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
 			    </div>	
 			    <div role="tabpanel" class="tab-pane" id="people">
-			    	<!-- PEOPLE -->
+			    	<div class="col-xs-offset-1 col-xs-11 player panel">
+			    		Select from the following online players you want to play a crossword game with:
+			    	</div>
 			    </div>
 			    <div role="tabpanel" class="tab-pane" id="scoreboard">
 			    	<!-- SCOREBOARD -->
@@ -110,10 +124,14 @@
 
 <template name="dictionaryTemplate">
 	<div class="dictTempDiv">
-		<b>Hello</b> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis soluta quae neque dolorem similique quia, modi quam vel sapiente cum assumenda quo dolor eum ullam, voluptas deleniti facilis recusandae fugiat?
+		<b>{{title}}</b> - {{desc}}
 		<br />
-		<a href="/cwplayer"><button class="btn btn-info btn-sm">Play</button></a>
+		<a href="/cwplayer/{{_id}}"><button class="btn btn-info btn-sm">Play</button></a>
 		&nbsp;&nbsp;&nbsp;
 		<button class="btn btn-success btn-sm play-online-button">Play Online</button>
 	</div>
+</template>
+
+<template name="peopleTemplate">
+	
 </template>
